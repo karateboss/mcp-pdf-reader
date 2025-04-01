@@ -10,7 +10,7 @@ requires-python = ">=3.8"
 dependencies = []
 
 [project.scripts]
-mcp-pdf = "pdf-mcp:main"
+mcp-pdf = "mcp_pdf_reader:main"
 
 [build-system]
 requires = ["hatchling"]
