@@ -1,12 +1,9 @@
 from dataclasses import dataclass
 from typing import AsyncIterator
 from mcp.server.fastmcp import FastMCP
-import pymupdf
+import fitz  # correct import for PyMuPDF
 import os
 from contextlib import asynccontextmanager
-
-# Initialize the MCP server
-mcp = FastMCP("PDF Reader", dependencies=["pymupdf"])
 
 # Directory where PDFs are stored
 PDF_DIRECTORY = os.getenv("PDF_DIRECTORY", "./pdfs")
@@ -16,17 +13,21 @@ class AppContext:
     """Application context for lifecycle management."""
     pdf_directory: str
 
+# Initialize the MCP server (lifespan added below)
+mcp = FastMCP("PDF Reader")
+
 @asynccontextmanager
 async def app_lifespan(server: FastMCP) -> AsyncIterator[AppContext]:
     """Manage application lifecycle with type-safe context"""
     try:
-        # Initialize PDF storage directory
+        # Setup can go here
         yield AppContext(pdf_directory=PDF_DIRECTORY)
     finally:
-        pass  # No cleanup needed for now
+        # Cleanup (if needed)
+        pass
 
-# Pass lifespan to server
-mcp = FastMCP("PDF Reader", lifespan=app_lifespan)
+# Assign lifespan to server
+mcp.lifespan = app_lifespan
 
 @mcp.tool()
 def read_pdf(ctx, filename: str) -> str:
@@ -43,12 +44,11 @@ def read_pdf(ctx, filename: str) -> str:
 
     try:
         # Open and extract text from the PDF
-        doc = pymupdf.open(pdf_path)
+        doc = fitz.open(pdf_path)
         text = "\n".join([page.get_text("text") for page in doc])
         return text if text else "No text found in the PDF."
     except Exception as e:
         return f"Error reading PDF: {str(e)}"
-
 
 # Run the MCP server
 if __name__ == "__main__":
