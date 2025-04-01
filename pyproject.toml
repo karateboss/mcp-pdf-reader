@@ -11,7 +11,7 @@ dependencies = ["pymupdf"]
 
 
 [project.scripts]
-mcp-pdf = "mcp_pdf_reader:main"
+mcp_pdf_reader = "mcp_pdf_reader:main"
 
 [build-system]
 requires = ["hatchling"]
