@@ -15,3 +15,6 @@ mcp-pdf = "mcp_pdf_reader:main"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+include = ["mcp_pdf_reader.py"]
