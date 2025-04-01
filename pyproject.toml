@@ -1,5 +1,5 @@
 [project]
-name = "mcp-pdf-reader"
+name = "mcp_pdf_reader"
 version = "0.1.0"
 description = "An MCP enabled PDF reader"
 authors = [
