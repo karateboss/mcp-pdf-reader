@@ -1,4 +1,4 @@
-# mcp-pdf-reader
+# mcp_pdf_reader
 Model Context Protocol (MCP) server to read a single pdf document
 
 ## Installation
