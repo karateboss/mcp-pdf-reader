@@ -51,5 +51,8 @@ def read_pdf(ctx, filename: str) -> str:
         return f"Error reading PDF: {str(e)}"
 
 # Run the MCP server
-if __name__ == "__main__":
+def main():
     mcp.run()
+
+if __name__ == "__main__":
+    main()
