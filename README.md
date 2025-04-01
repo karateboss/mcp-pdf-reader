@@ -45,8 +45,8 @@ Add the following to your `claude_desktop_config.json`:
             "command": "uvx",
             "args": [
                 "--from",
-                "git+https://github.com/karateboss/mcp-pdf-reader@main",
-                "read_pdf"
+                "git+https://github.com/karateboss/mcp_pdf_reader@main",
+                "mcp_pdf_reader"
             ]
         }
     }
